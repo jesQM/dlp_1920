@@ -1,21 +1,34 @@
 package ast.definitions.subclasses;
 
 import ast.definitions.AbstractDefinition;
+import ast.definitions.Definition;
+import ast.statement.AbstractStatement;
 import ast.statement.Statement;
 import ast.type.Type;
-import ast.utils.varDefinition.VarDefinitionStatement;
 
-public class VarDefinition extends AbstractDefinition implements Statement{
+public class VarDefinition extends AbstractStatement implements Definition {
 
-	private VarDefinitionStatement varDefinitionStatement;
-	
+	String name;
+	Type type;
+
 	public VarDefinition(int line, int column, String name, Type type) {
-		super(line, column, name, type);
-		varDefinitionStatement = new VarDefinitionStatement(line, column);
+		super(line, column);
+		this.name = name;
+		this.type = type;
 	}
 
 	@Override
 	public String toString() {
 		return getType() + " " + getName();
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public Type getType() {
+		return this.type;
 	}
 }
