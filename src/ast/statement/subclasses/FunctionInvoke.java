@@ -6,6 +6,7 @@ import java.util.List;
 import ast.expression.Expression;
 import ast.expression.subclasses.Variable;
 import ast.statement.AbstractStatement;
+import visitor.Visitor;
 
 public class FunctionInvoke extends AbstractStatement implements Expression {
 	
@@ -36,5 +37,10 @@ public class FunctionInvoke extends AbstractStatement implements Expression {
 			params.subSequence(0, params.length()-2);
 
 		return variable + "("+params+")";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

@@ -3,6 +3,7 @@ package ast.type.subclasses;
 import ast.ASTNode;
 import ast.AbstractASTNode;
 import ast.type.Type;
+import visitor.Visitor;
 
 public class RecordField extends AbstractASTNode implements ASTNode {
 	private String name;
@@ -25,5 +26,10 @@ public class RecordField extends AbstractASTNode implements ASTNode {
 	@Override
 	public String toString() {
 		return type + " " + name;
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

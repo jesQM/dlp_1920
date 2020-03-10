@@ -6,6 +6,7 @@ import java.util.List;
 import ast.expression.Expression;
 import ast.statement.AbstractStatement;
 import ast.statement.Statement;
+import visitor.Visitor;
 
 public class IfElse extends AbstractStatement{
 
@@ -38,5 +39,10 @@ public class IfElse extends AbstractStatement{
 			return "if(" +condition+ "){ " +ifStatements+ " }";
 
 		return "if(" +condition+ "){ " +ifStatements+ " } else { " +elseStatements+ " }";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

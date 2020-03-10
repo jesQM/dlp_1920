@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import ast.type.AbstractType;
+import visitor.Visitor;
 
 public class RecordType extends AbstractType{
 
@@ -25,6 +26,11 @@ public class RecordType extends AbstractType{
 	@Override
 	public String toString() {
 		return "record {"+fields+"}";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 
 	private void checkForDuplicateFieldName(){

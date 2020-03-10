@@ -2,6 +2,7 @@ package ast.statement.subclasses;
 
 import ast.expression.Expression;
 import ast.statement.AbstractStatement;
+import visitor.Visitor;
 
 public class Assignment extends AbstractStatement{
 
@@ -25,5 +26,10 @@ public class Assignment extends AbstractStatement{
 	@Override
 	public String toString() {
 		return expression1 + " = " + expression2;
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

@@ -7,6 +7,7 @@ import ast.definitions.AbstractDefinition;
 import ast.statement.Statement;
 import ast.type.Type;
 import ast.type.subclasses.FunctionType;
+import visitor.Visitor;
 
 public class FuncDefinition extends AbstractDefinition {
 
@@ -24,5 +25,10 @@ public class FuncDefinition extends AbstractDefinition {
 	@Override
 	public String toString() {
 		return  getName() + " " + getType() + "{" + statements + '}';
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

@@ -3,6 +3,7 @@ package ast.expression.subclasses;
 import ast.expression.AbstractExpression;
 import ast.expression.Expression;
 import ast.type.Type;
+import visitor.Visitor;
 
 public class Cast extends AbstractExpression {
 	
@@ -22,5 +23,10 @@ public class Cast extends AbstractExpression {
 	@Override
 	public String toString() {
 		return "{ ("+toType+")" +expression+ " }";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

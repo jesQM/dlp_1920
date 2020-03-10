@@ -5,6 +5,7 @@ import ast.definitions.Definition;
 import ast.statement.AbstractStatement;
 import ast.statement.Statement;
 import ast.type.Type;
+import visitor.Visitor;
 
 public class VarDefinition extends AbstractStatement implements Definition {
 
@@ -30,5 +31,10 @@ public class VarDefinition extends AbstractStatement implements Definition {
 	@Override
 	public Type getType() {
 		return this.type;
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

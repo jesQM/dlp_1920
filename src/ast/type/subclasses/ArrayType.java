@@ -2,6 +2,7 @@ package ast.type.subclasses;
 
 import ast.type.AbstractType;
 import ast.type.Type;
+import visitor.Visitor;
 
 public class ArrayType extends AbstractType{
 
@@ -16,6 +17,11 @@ public class ArrayType extends AbstractType{
 
 	public Type getArrayOf() {
 		return arrayOf;
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 
 	public static ArrayType createArray(int line, int column, Type arrayOf, int length){

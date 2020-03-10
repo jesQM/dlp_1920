@@ -2,6 +2,7 @@ package ast.expression.subclasses;
 
 import ast.expression.AbstractExpression;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class Relational extends AbstractExpression {
 
@@ -27,5 +28,10 @@ public class Relational extends AbstractExpression {
 	@Override
 	public String toString() {
 		return "{ " +leftSide+ " " +operator+ " " +rightSide+ "}";
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }

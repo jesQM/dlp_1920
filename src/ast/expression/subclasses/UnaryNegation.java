@@ -2,6 +2,7 @@ package ast.expression.subclasses;
 
 import ast.expression.AbstractExpression;
 import ast.expression.Expression;
+import visitor.Visitor;
 
 public class UnaryNegation extends AbstractExpression {
 
@@ -19,5 +20,10 @@ public class UnaryNegation extends AbstractExpression {
 	@Override
 	public String toString() {
 		return "!"+expression;
+	}
+
+	@Override
+	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
+		return v.visit(this, param);
 	}
 }
