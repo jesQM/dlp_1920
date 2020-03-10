@@ -18,6 +18,14 @@ public class FunctionType extends AbstractType{
 		this.returnType = returnType;
 	}
 
+	public Type getReturnType() {
+		return returnType;
+	}
+
+	public List<VarDefinition> getParameters() {
+		return new ArrayList<>(parameters);
+	}
+
 	@Override
 	public String toString() {
 		return "function("+parameters+" :"+returnType+")";

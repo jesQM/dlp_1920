@@ -18,6 +18,10 @@ public class RecordType extends AbstractType{
 		this.checkForDuplicateFieldName();
 	}
 
+	public List<RecordField> getFields() {
+		return new ArrayList<>(this.fields);
+	}
+
 	@Override
 	public String toString() {
 		return "record {"+fields+"}";

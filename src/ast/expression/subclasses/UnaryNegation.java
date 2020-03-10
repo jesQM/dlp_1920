@@ -11,6 +11,11 @@ public class UnaryNegation extends AbstractExpression {
 		super(line, column);
 		this.expression = expression;
 	}
+
+	public Expression getExpression() {
+		return expression;
+	}
+
 	@Override
 	public String toString() {
 		return "!"+expression;

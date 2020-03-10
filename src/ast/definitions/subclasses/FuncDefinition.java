@@ -17,6 +17,10 @@ public class FuncDefinition extends AbstractDefinition {
 		this.statements = new ArrayList<>(statements);
 	}
 
+	public List<Statement> getStatements() {
+		return new ArrayList<>(this.statements);
+	}
+
 	@Override
 	public String toString() {
 		return  getName() + " " + getType() + "{" + statements + '}';

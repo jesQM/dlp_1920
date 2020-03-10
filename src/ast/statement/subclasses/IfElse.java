@@ -20,6 +20,18 @@ public class IfElse extends AbstractStatement{
 		this.elseStatements = new ArrayList<Statement>(elseStatements);
 	}
 
+	public Expression getCondition() {
+		return condition;
+	}
+
+	public List<Statement> getIfStatements() {
+		return new ArrayList<>(this.ifStatements);
+	}
+
+	public List<Statement> getElseStatements() {
+		return new ArrayList<>(this.elseStatements);
+	}
+
 	@Override
 	public String toString() {
 		if (elseStatements.size() == 0)

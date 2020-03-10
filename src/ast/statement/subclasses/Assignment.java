@@ -14,6 +14,14 @@ public class Assignment extends AbstractStatement{
 		this.expression2 = expression2;
 	}
 
+	public Expression getExpression1() {
+		return expression1;
+	}
+
+	public Expression getExpression2() {
+		return expression2;
+	}
+
 	@Override
 	public String toString() {
 		return expression1 + " = " + expression2;

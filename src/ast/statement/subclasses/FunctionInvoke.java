@@ -18,6 +18,14 @@ public class FunctionInvoke extends AbstractStatement implements Expression {
 		this.variable = name;
 	}
 
+	public List<Expression> getExpressions() {
+		return new ArrayList<>(this.expressions);
+	}
+
+	public Variable getVariable() {
+		return variable;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder params = new StringBuilder();

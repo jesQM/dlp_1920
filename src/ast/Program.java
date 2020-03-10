@@ -13,4 +13,8 @@ public class Program extends AbstractASTNode{
 		super(line, column);
 		this.definitions = new ArrayList<>(definitions);
 	}
+
+	public List<Definition> getDefinitions() {
+		return new ArrayList<>(this.definitions);
+	}
 }

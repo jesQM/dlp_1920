@@ -18,6 +18,14 @@ public class WhileLoop extends AbstractStatement{
 		this.condition = condition;
 	}
 
+	public Expression getCondition() {
+		return condition;
+	}
+
+	public List<Statement> getStatements() {
+		return new ArrayList<>(this.statements);
+	}
+
 	@Override
 	public String toString() {
 		return "while(" +condition+ "){ " +statements+ " }";
