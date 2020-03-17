@@ -12,7 +12,8 @@ public class FunctionInvoke extends AbstractStatement implements Expression {
 	
 	private List<Expression> expressions;
 	private Variable variable;
-	
+	private boolean lvalue;
+
 	public FunctionInvoke(int line, int column, Variable name, List<Expression> parameters) {
 		super(line, column);
 		this.expressions = new ArrayList<Expression>(parameters);
@@ -42,5 +43,15 @@ public class FunctionInvoke extends AbstractStatement implements Expression {
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
+	}
+
+	@Override
+	public boolean getLvalue() {
+		return this.lvalue;
+	}
+
+	@Override
+	public void setLvalue(boolean lvalue) {
+		this.lvalue = lvalue;
 	}
 }
