@@ -111,11 +111,11 @@ public class TypeCheckingVisitor extends AbstractVisitor<Void, Void> {
         return null;
     }
 
-    @Override
+    /*@Override
     public Void visit(Return ast, Void param) {
         super.visit(ast, param);
         if ( ast.getExpression().getLvalue() )
             new ErrorType(ast.getLine(), ast.getColumn(), "Lvalue expected");
         return null;
-    }
+    }*/
 }

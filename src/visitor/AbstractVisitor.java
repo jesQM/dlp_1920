@@ -179,6 +179,7 @@ public abstract class AbstractVisitor<TP, TR> implements Visitor<TP, TR> {
 
     @Override
     public TR visit(FuncDefinition ast, TP param) {
+        ast.getType().accept( this, param );
         ast.getStatements().forEach( node -> node.accept(this, param) );
         return null;
     }
