@@ -11,6 +11,7 @@ public class VarDefinition extends AbstractStatement implements Definition {
 
 	String name;
 	Type type;
+	private int scope;
 
 	public VarDefinition(int line, int column, String name, Type type) {
 		super(line, column);
@@ -31,6 +32,16 @@ public class VarDefinition extends AbstractStatement implements Definition {
 	@Override
 	public Type getType() {
 		return this.type;
+	}
+
+	@Override
+	public int getScope() {
+		return this.scope;
+	}
+
+	@Override
+	public void setScope(int scope) {
+		this.scope = scope;
 	}
 
 	@Override

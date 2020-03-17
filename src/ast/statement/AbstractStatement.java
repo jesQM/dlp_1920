@@ -7,5 +7,4 @@ public abstract class AbstractStatement extends AbstractASTNode implements State
 	public AbstractStatement(int line, int column) {
 		super(line, column);
 	}
-
 }
