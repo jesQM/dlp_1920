@@ -6,6 +6,7 @@ import ast.definitions.subclasses.VarDefinition;
 import ast.expression.subclasses.Variable;
 import ast.statement.subclasses.FunctionInvoke;
 import ast.type.subclasses.ErrorType;
+import errorHandler.ErrorHandler;
 import symbolTable.SymbolTable;
 import visitor.AbstractVisitor;
 
@@ -32,18 +33,11 @@ public class IdentificationVisitor extends AbstractVisitor<Void, Void> {
     }
 
     @Override
-    public Void visit(FunctionInvoke ast, Void param) {
-        Definition definition =  st.find(ast.getVariable().getName());
-        if( definition == null )
-            new ErrorType(ast.getLine(), ast.getColumn(),String.format("The identifier \"%s\" is not defined", ast.getVariable().getName()) );
-
-        ast.getVariable().setDefinition(definition);
-        return super.visit(ast, param);
-    }
-
-    @Override
     public Void visit(Variable ast, Void param) {
+        ErrorHandler errorHandler = ErrorHandler.getInstance();
+
         Definition definition =  st.find(ast.getName());
+
         if( definition == null )
             new ErrorType(ast.getLine(), ast.getColumn(),String.format("The identifier \"%s\" is not defined", ast.getName()) );
 

@@ -1,22 +1,13 @@
-// * Global variables
-int i,n;
-char c;
-struct {
-  int intField;
-  double realField;
-} record;
+int integer;
+char character;
+double real, integer; // * Error 1
 
-// * Functions
-int f(int a, double c) {
-  double real;
-  real = c;
-  i = a;
-  return n;
+void p(int a) {
+  char a;             // * Error 2
 }
 
-// * Main program
 void main() {
-  int i;
-  double r;
-  write i, f(n,r), record.intField, record.realField;
+  double character;
+  read integer, i;    // * Error 3
+  f();                // * Error 4
 }
