@@ -11,9 +11,9 @@ public interface Type extends ASTNode {
     Type comparison(Type other, ASTNode lineAndColumn);
     boolean isBoolean(ASTNode lineAndColumn);
 
-    void canBeAssigned(Type other, ASTNode lineAndColumn);
+    Type canBeAssigned(Type other, ASTNode lineAndColumn);
     Type not(ASTNode lineAndColumn);
-    void canBeMinus(ASTNode lineAndColumn);
-    void canBeinvoked(List<Expression> parameters, ASTNode lineAndColumn);
+    Type canBeMinus(ASTNode lineAndColumn);
+    Type canBeInvoked(List<Expression> parameters, ASTNode lineAndColumn);
     Type dot(String ID, ASTNode lineAndColumn);
 }
