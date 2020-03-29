@@ -10,18 +10,18 @@ import visitor.Visitor;
 
 public class FunctionInvoke extends AbstractStatement implements Expression {
 	
-	private List<Expression> expressions;
+	private List<Expression> parameters;
 	private Variable variable;
 	private boolean lvalue;
 
 	public FunctionInvoke(int line, int column, Variable name, List<Expression> parameters) {
 		super(line, column);
-		this.expressions = new ArrayList<Expression>(parameters);
+		this.parameters = new ArrayList<Expression>(parameters);
 		this.variable = name;
 	}
 
-	public List<Expression> getExpressions() {
-		return new ArrayList<>(this.expressions);
+	public List<Expression> getParameters() {
+		return new ArrayList<>(this.parameters);
 	}
 
 	public Variable getVariable() {
@@ -31,7 +31,7 @@ public class FunctionInvoke extends AbstractStatement implements Expression {
 	@Override
 	public String toString() {
 		StringBuilder params = new StringBuilder();
-		for (Expression param: expressions) {
+		for (Expression param: parameters) {
 			params.append(param + " ,");
 		}
 		if (params.length() > 0)
