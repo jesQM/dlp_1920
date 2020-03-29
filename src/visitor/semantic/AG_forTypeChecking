@@ -11,6 +11,7 @@ P: expression1 = expression2 (&& | ||) expression3
 R: expression1.type = expression2.type.logic(expression3.type, expression1)
 
 WhileStatement:
+P: statement1 -> expression statement2*
 R: if(!expression1.type.isBoolean())
         new ErrorType(expression1.getLine(), expression1.getColumn(), "The stop condition is not boolean");
 
@@ -20,7 +21,7 @@ R: if(!expression1.type.isBoolean())
 
 Assignment:
 P: statement -> expression1 expression2
-R: exp1.type.canBeAssigned(exp2.type, exp1)
+R: exp1.type.canBeAssigned(exp2.type, statement)
 
 UnaryNegation:
 P: expression1 -> expression2
@@ -37,7 +38,7 @@ R: expression2.type.canBeMinus(expression2)
 
 FunctionInvoke:
 P: expression1 -> expression2 expression3*
-R: expression1.variable.type.canBeInvoked(expression3)
+R: expression1.variable.type.canBeInvoked(expression3, expression1)
 /*
     Definition def = exp1.getVariable().definition
     if ( def != null)
@@ -50,4 +51,4 @@ R: statement.returnType.canBeAssigned(expression.type, statement) // returnType 
 
 FieldAccess:
 P: exp1 -> exp2 ID
-R: exp1.type = exp2.type.dot(ID)
+R: exp1.type = exp2.type.dot(ID, exp1)
