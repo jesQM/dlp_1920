@@ -6,6 +6,7 @@ import java.util.List;
 import ast.expression.Expression;
 import ast.expression.subclasses.Variable;
 import ast.statement.AbstractStatement;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class FunctionInvoke extends AbstractStatement implements Expression {
@@ -13,6 +14,7 @@ public class FunctionInvoke extends AbstractStatement implements Expression {
 	private List<Expression> parameters;
 	private Variable variable;
 	private boolean lvalue;
+	private Type type;
 
 	public FunctionInvoke(int line, int column, Variable name, List<Expression> parameters) {
 		super(line, column);
@@ -26,6 +28,16 @@ public class FunctionInvoke extends AbstractStatement implements Expression {
 
 	public Variable getVariable() {
 		return variable;
+	}
+
+	@Override
+	public Type getType() {
+		return type;
+	}
+
+	@Override
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 	@Override

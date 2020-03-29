@@ -20,6 +20,10 @@ public class ArrayType extends AbstractType{
 		return arrayOf;
 	}
 
+	public int getLength() {
+		return length;
+	}
+
 	@Override
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
@@ -32,6 +36,15 @@ public class ArrayType extends AbstractType{
 		}
 
 		return super.squareBrackets(other, lineAndColumn);
+	}
+
+	@Override
+	public Type canBeAssigned(Type other, ASTNode lineAndColumn) {
+		if (other instanceof ArrayType) {
+			return new ArrayType(lineAndColumn.getLine(), lineAndColumn.getColumn(), ((ArrayType)other).getArrayOf(), ((ArrayType)other).getLength());
+		}
+
+		return super.canBeAssigned(other, lineAndColumn);
 	}
 
 	// Create arrays correctly

@@ -52,3 +52,8 @@ R: statement.returnType.canBeAssigned(expression.type, statement) // returnType 
 FieldAccess:
 P: exp1 -> exp2 ID
 R: exp1.type = exp2.type.dot(ID, exp1)
+
+Cast
+IntLiteral
+CharLiteral
+DoubleLiteral

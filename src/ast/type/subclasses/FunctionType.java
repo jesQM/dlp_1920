@@ -41,8 +41,16 @@ public class FunctionType extends AbstractType{
 
 	@Override
 	public Type canBeInvoked(List<Expression> parameters, ASTNode lineAndColumn) {
-		// TODO;
-		String msg = String.format("Cannot invoke %s", this.toString());
-		return new ErrorType(lineAndColumn.getLine(), lineAndColumn.getColumn(), msg);
+		// Make sure all params are ok
+		// 1.- Same number of params
+		if (parameters.size() != this.parameters.size())
+			new ErrorType(lineAndColumn.getLine(), lineAndColumn.getColumn(),
+			"Wrong number of parameters, expected "+this.parameters.size()+" found " + parameters.size());
+
+		// 2.- Compatible type
+		for (int i = 0; i < parameters.size(); i++) {
+			this.parameters.get(i).getType().canBeAssigned(parameters.get(i).getType(), parameters.get(i));
+		}
+		return this.returnType;
 	}
 }

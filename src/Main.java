@@ -26,8 +26,8 @@ public class Main {
 		//parser.program();
 
 		ASTNode ast = parser.program().ast;
-		new TypeCheckingVisitor().visit( (Program) ast, null);
 		new IdentificationVisitor().visit( (Program) ast, null);
+		new TypeCheckingVisitor().visit( (Program) ast, null);
 
 		IntrospectorModel model = new IntrospectorModel("Program", ast);
 		new IntrospectorTree("Program", model);
