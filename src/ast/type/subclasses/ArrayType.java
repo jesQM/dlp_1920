@@ -1,5 +1,6 @@
 package ast.type.subclasses;
 
+import ast.ASTNode;
 import ast.type.AbstractType;
 import ast.type.Type;
 import visitor.Visitor;
@@ -23,6 +24,17 @@ public class ArrayType extends AbstractType{
 	public <TP, TR> TR accept(Visitor<TP, TR> v, TP param) {
 		return v.visit(this, param);
 	}
+
+	@Override
+	public Type squareBrackets(Type other, ASTNode lineAndColumn) {
+		if (other instanceof IntType) {
+			return arrayOf;
+		}
+
+		return super.squareBrackets(other, lineAndColumn);
+	}
+
+	// Create arrays correctly
 
 	public static ArrayType createArray(int line, int column, Type arrayOf, int length){
 		ArrayType result = null;

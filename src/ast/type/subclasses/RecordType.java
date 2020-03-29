@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import ast.ASTNode;
 import ast.type.AbstractType;
+import ast.type.Type;
 import visitor.Visitor;
 
 public class RecordType extends AbstractType{
@@ -43,5 +45,16 @@ public class RecordType extends AbstractType{
 				new ErrorType(getLine(), getColumn(), message);
 			}
 		}
+	}
+
+	@Override
+	public Type dot(String ID, ASTNode lineAndColumn) {
+		for (RecordField f: fields) {
+			if ( f.getName().equals(ID) )
+				return f.getType();
+		}
+
+		String msg = String.format("Cannot find field %s of Record", ID);
+		return new ErrorType(lineAndColumn.getLine(), lineAndColumn.getColumn(), msg);
 	}
 }
