@@ -1,10 +1,29 @@
 
-int[10] v;
+// * Global variables
+int i;
+double r;
+char c;
 
-void main() {
-  int i;
-  i[0]=0;      // * Error 1
-  v[3]=3.4;    // * Error 2
-  v[1][2]='a'; // * Error 3
+// * Functions
+int f(int pi, double pr) {
+  double lr;
+  int li;
+  li = pi;
+  lr = pr;
+  return pi;
 }
 
+// * Main program
+void main() {
+  struct {
+    int integer;
+    char character;
+  } pair;
+
+  i = 3;
+  c = 'a';
+  r = 3.8;
+  pair.integer = i;
+  pair.character = c;
+  f(i, r);
+}

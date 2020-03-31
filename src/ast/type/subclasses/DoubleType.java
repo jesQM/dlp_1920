@@ -26,9 +26,9 @@ public class DoubleType extends AbstractType{
 	public Type arithmetic(Type other, ASTNode lineAndColumn) {
 		if (other instanceof DoubleType) {
 			return new DoubleType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		} else if (other instanceof IntType) {
+		}/* else if (other instanceof IntType) {
 			return new DoubleType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		}
+		}*/
 
 		return super.arithmetic(other, lineAndColumn);
 	}

@@ -26,9 +26,9 @@ public class CharType extends AbstractType{
 	public Type arithmetic(Type other, ASTNode lineAndColumn) {
 		if (other instanceof CharType) {
 			return new CharType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		} else if (other instanceof IntType) {
+		} /*else if (other instanceof IntType) {
 			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		}
+		}*/
 
 		return super.arithmetic(other, lineAndColumn);
 	}
