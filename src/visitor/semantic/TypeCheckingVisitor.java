@@ -120,7 +120,11 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
         super.visit(ast, param);
         ast.setLvalue(true);
 
-        ast.setType( ast.getDefinition().getType() ); // TODO; Is this OK?
+        if ( ast.getDefinition() == null )
+            ast.setType( new ErrorType(ast.getLine(), ast.getColumn(),
+                    String.format("The identifier \"%s\" is not defined", ast.getName())) );
+        else
+            ast.setType( ast.getDefinition().getType() );
         return null;
     }
 

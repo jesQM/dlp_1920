@@ -8,6 +8,7 @@ import visitor.Visitor;
 public class RecordField extends AbstractASTNode implements ASTNode {
 	private String name;
 	private Type type;
+	private int offset;
 
 	public RecordField(int line, int column, String name, Type type) {
 		super(line, column);
@@ -21,6 +22,14 @@ public class RecordField extends AbstractASTNode implements ASTNode {
 
 	public Type getType() {
 		return type;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
 	@Override

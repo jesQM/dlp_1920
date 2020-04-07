@@ -16,6 +16,7 @@ R: if(!expression1.type.isBoolean())
         new ErrorType(expression1.getLine(), expression1.getColumn(), "The stop condition is not boolean");
 
 IfStatement:
+P: statement1 -> expression statement2* statement3*
 R: if(!expression1.type.isBoolean())
            new ErrorType(expression1.getLine(), expression1.getColumn(), "The condition is not boolean");
 

@@ -16,4 +16,6 @@ public interface Type extends ASTNode {
     Type canBeMinus(ASTNode lineAndColumn);
     Type canBeInvoked(List<Expression> parameters, ASTNode lineAndColumn);
     Type dot(String ID, ASTNode lineAndColumn);
+
+    int getNumberOfBytes();
 }

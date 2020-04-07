@@ -10,7 +10,7 @@ public class Cast extends AbstractExpression {
 	private Type toType;
 	private Expression expression;
 	
-	public Cast(int line, int column, Type toType, Expression expression) { //TODO; add Expression to constructor
+	public Cast(int line, int column, Type toType, Expression expression) {
 		super(line, column);
 		this.toType = toType;
 		this.expression = expression;

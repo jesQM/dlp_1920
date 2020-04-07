@@ -9,7 +9,8 @@ public class CharType extends AbstractType{
 
 	public CharType(int line, int column) {
 		super(line, column);
-		// TODO Auto-generated constructor stub
+
+		super.setNumberOfBytes(1);
 	}
 
 	@Override

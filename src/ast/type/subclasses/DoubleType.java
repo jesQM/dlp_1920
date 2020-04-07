@@ -9,7 +9,8 @@ public class DoubleType extends AbstractType{
 
 	public DoubleType(int line, int column) {
 		super(line, column);
-		// TODO Auto-generated constructor stub
+
+		super.setNumberOfBytes(4);
 	}
 
 	@Override

@@ -14,6 +14,8 @@ public class ArrayType extends AbstractType{
 		super(line, column);
 		this.arrayOf = arrayOf;
 		this.length = length;
+
+		super.setNumberOfBytes( this.length * this.arrayOf.getNumberOfBytes() );
 	}
 
 	public Type getArrayOf() {

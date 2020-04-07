@@ -19,10 +19,20 @@ public class RecordType extends AbstractType{
 		this.fields = new ArrayList<>(fields);
 
 		this.checkForDuplicateFieldName();
+		this.setNumberOfBytes(-1);
 	}
 
 	public List<RecordField> getFields() {
 		return new ArrayList<>(this.fields);
+	}
+
+	@Override
+	protected void setNumberOfBytes(int amount) {
+		int addition = 0;
+		for (RecordField f: fields) {
+			addition += f.getType().getNumberOfBytes();
+		}
+		super.setNumberOfBytes(addition);
 	}
 
 	@Override

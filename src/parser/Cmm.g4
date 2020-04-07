@@ -107,7 +107,7 @@ expression returns [Expression ast]:
                 { $ast = new Arithmetic( $left.ast.getLine(), $left.ast.getColumn(), $op.text, $left.ast, $right.ast ); }
             | left=expression op=('>'|'>='|'<'|'<='|'!='|'==') right=expression
                 { $ast = new Relational( $left.ast.getLine(), $left.ast.getColumn(), $op.text, $left.ast, $right.ast ); }
-            | left=expression op=('&&'|'||') right=expression
+            | left=expression op=('&&'|'||') right=expression // TODO;
                 { $ast = new Relational( $left.ast.getLine(), $left.ast.getColumn(), $op.text, $left.ast, $right.ast ); }
             | '!' exp=expression
                 { $ast = new UnaryNegation( $exp.ast.getLine(), $exp.ast.getColumn(), $exp.ast ); }
@@ -133,7 +133,7 @@ list_of_expressions returns [List<Expression> ast = new ArrayList<>()]:
 
 type returns [Type ast]: primitive_type { $ast = $primitive_type.ast; }
     | ty=type '['INT_CONSTANT']'
-        { $ast = ArrayType.createArray($ty.ast.getLine(), $ty.ast.getColumn(), $ty.ast, LexerHelper.lexemeToInt($INT_CONSTANT.text) ); } //TODO;
+        { $ast = ArrayType.createArray($ty.ast.getLine(), $ty.ast.getColumn(), $ty.ast, LexerHelper.lexemeToInt($INT_CONSTANT.text) ); }
 
     | st='struct' '{'def=record_fields'}'
         { $ast = new RecordType( $st.getLine(), $st.getCharPositionInLine()+1, $def.ast ); }

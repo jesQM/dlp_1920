@@ -5,6 +5,7 @@ import parser.*;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
 import org.antlr.v4.runtime.*;
+import visitor.OffsetVisitor;
 import visitor.identification.IdentificationVisitor;
 import visitor.semantic.TypeCheckingVisitor;
 
@@ -28,6 +29,7 @@ public class Main {
 		ASTNode ast = parser.program().ast;
 		new IdentificationVisitor().visit( (Program) ast, null);
 		new TypeCheckingVisitor().visit( (Program) ast, null);
+		new OffsetVisitor().visit( (Program) ast, null);
 
 		IntrospectorModel model = new IntrospectorModel("Program", ast);
 		new IntrospectorTree("Program", model);

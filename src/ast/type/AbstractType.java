@@ -9,9 +9,15 @@ import java.util.List;
 
 public abstract class AbstractType extends AbstractASTNode implements Type{
 
+	protected int numberOfBytes = 0;
+
 	public AbstractType(int line, int column) {
 		super(line, column);
 	}
+
+	protected void setNumberOfBytes(int amount){
+		this.numberOfBytes = amount;
+	};
 
 	@Override
 	public Type arithmetic(Type other, ASTNode lineAndColumn) {
@@ -64,5 +70,10 @@ public abstract class AbstractType extends AbstractASTNode implements Type{
 	public Type dot(String ID, ASTNode lineAndColumn) {
 		String msg = String.format("Cannot access the field %s of %s", ID, this.toString());
 		return new ErrorType(lineAndColumn.getLine(), lineAndColumn.getColumn(), msg);
+	}
+
+	@Override
+	public int getNumberOfBytes() {
+		return this.numberOfBytes;
 	}
 }

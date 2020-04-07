@@ -34,12 +34,13 @@ public class IdentificationVisitor extends AbstractVisitor<Void, Void> {
 
     @Override
     public Void visit(Variable ast, Void param) {
-        ErrorHandler errorHandler = ErrorHandler.getInstance();
-
         Definition definition =  st.find(ast.getName());
 
+        /*
+        Check done in the TypeCheckingVisitor
         if( definition == null )
             new ErrorType(ast.getLine(), ast.getColumn(),String.format("The identifier \"%s\" is not defined", ast.getName()) );
+        */
 
         ast.setDefinition(definition);
 
