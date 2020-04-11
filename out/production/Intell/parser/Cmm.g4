@@ -107,8 +107,8 @@ expression returns [Expression ast]:
                 { $ast = new Arithmetic( $left.ast.getLine(), $left.ast.getColumn(), $op.text, $left.ast, $right.ast ); }
             | left=expression op=('>'|'>='|'<'|'<='|'!='|'==') right=expression
                 { $ast = new Relational( $left.ast.getLine(), $left.ast.getColumn(), $op.text, $left.ast, $right.ast ); }
-            | left=expression op=('&&'|'||') right=expression // TODO;
-                { $ast = new Relational( $left.ast.getLine(), $left.ast.getColumn(), $op.text, $left.ast, $right.ast ); }
+            | left=expression op=('&&'|'||') right=expression
+                { $ast = new Logical( $left.ast.getLine(), $left.ast.getColumn(), $op.text, $left.ast, $right.ast ); }
             | '!' exp=expression
                 { $ast = new UnaryNegation( $exp.ast.getLine(), $exp.ast.getColumn(), $exp.ast ); }
             | REAL_CONSTANT

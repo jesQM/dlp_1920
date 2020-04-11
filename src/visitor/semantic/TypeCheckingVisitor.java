@@ -85,6 +85,19 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
     }
 
     @Override
+    public Type visit(Logical ast, Type param) {
+        super.visit(ast, param);
+        ast.setLvalue( false );
+
+        // Type of the expression
+        Type leftSide = ast.getLeftSide().getType();
+        Type rightSide = ast.getRightSide().getType();
+
+        ast.setType(leftSide.logical(rightSide, ast));
+        return null;
+    }
+
+    @Override
     public Type visit(Relational ast, Type param) {
         super.visit(ast, param);
         ast.setLvalue( false );

@@ -46,5 +46,5 @@ public interface Visitor<TP,TR> {
     // Definition
     TR visit(FuncDefinition ast, TP param);
     TR visit(VarDefinition ast, TP param);
-
+    TR visit(Logical ast, TP param);
 }

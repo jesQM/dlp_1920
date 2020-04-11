@@ -1,4 +1,4 @@
-// Generated from D:/MiUsuario/Escritorio/EclipseStuff/tercero/DLP/Lab04/src/parser\Cmm.g4 by ANTLR 4.8
+// Generated from D:/MiUsuario/Escritorio/EclipseStuff/tercero/DLP/_Lab/GitEnabled/src/parser\Cmm.g4 by ANTLR 4.8
 package parser;
 
 import ast.*;
@@ -1248,7 +1248,7 @@ public class CmmParser extends Parser {
 						}
 						setState(272);
 						((ExpressionContext)_localctx).right = expression(7);
-						 ((ExpressionContext)_localctx).ast =  new Relational( ((ExpressionContext)_localctx).left.ast.getLine(), ((ExpressionContext)_localctx).left.ast.getColumn(), (((ExpressionContext)_localctx).op!=null?((ExpressionContext)_localctx).op.getText():null), ((ExpressionContext)_localctx).left.ast, ((ExpressionContext)_localctx).right.ast ); 
+						 ((ExpressionContext)_localctx).ast =  new Logical( ((ExpressionContext)_localctx).left.ast.getLine(), ((ExpressionContext)_localctx).left.ast.getColumn(), (((ExpressionContext)_localctx).op!=null?((ExpressionContext)_localctx).op.getText():null), ((ExpressionContext)_localctx).left.ast, ((ExpressionContext)_localctx).right.ast ); 
 						}
 						break;
 					case 5:

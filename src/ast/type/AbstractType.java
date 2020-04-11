@@ -38,6 +38,12 @@ public abstract class AbstractType extends AbstractASTNode implements Type{
 	}
 
 	@Override
+	public Type logical(Type other, ASTNode lineAndColumn) {
+		String msg = String.format("Cannot perform logic operation between %s and %s", this.toString(), other.toString());
+		return new ErrorType(lineAndColumn.getLine(), lineAndColumn.getColumn(), msg);
+	}
+
+	@Override
 	public boolean isBoolean(ASTNode lineAndColumn) {
 		return false;
 	}

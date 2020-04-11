@@ -26,26 +26,27 @@ public class IntType extends AbstractType{
 	public Type arithmetic(Type other, ASTNode lineAndColumn) {
 		if (other instanceof IntType) {
 			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		} /*else if (other instanceof DoubleType) {
-			return new DoubleType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		} else if (other instanceof CharType){
-			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		} */
+		}
 
 		return super.arithmetic(other, lineAndColumn);
+	}
+
+	@Override
+	public Type logical(Type other, ASTNode lineAndColumn) {
+		if (other instanceof IntType) {
+			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+		}
+
+		return super.logical(other, lineAndColumn);
 	}
 
 	@Override
 	public Type comparison(Type other, ASTNode lineAndColumn) {
 		if (other instanceof IntType) {
 			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		} /*else if (other instanceof DoubleType){
-			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		}*/ else if (other instanceof CharType){
-			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
 		}
 
-		return super.arithmetic(other, lineAndColumn);
+		return super.comparison(other, lineAndColumn);
 	}
 
 	@Override

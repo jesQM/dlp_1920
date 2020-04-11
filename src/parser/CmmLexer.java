@@ -1,4 +1,4 @@
-// Generated from D:/MiUsuario/Escritorio/EclipseStuff/tercero/DLP/Lab04/src/parser\Cmm.g4 by ANTLR 4.8
+// Generated from D:/MiUsuario/Escritorio/EclipseStuff/tercero/DLP/_Lab/GitEnabled/src/parser\Cmm.g4 by ANTLR 4.8
 package parser;
 
 import ast.*;

@@ -37,7 +37,7 @@ public class IdentificationVisitor extends AbstractVisitor<Void, Void> {
         Definition definition =  st.find(ast.getName());
 
         /*
-        Check done in the TypeCheckingVisitor
+        // Check done in the TypeCheckingVisitor
         if( definition == null )
             new ErrorType(ast.getLine(), ast.getColumn(),String.format("The identifier \"%s\" is not defined", ast.getName()) );
         */
