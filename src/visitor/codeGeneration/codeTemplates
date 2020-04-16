@@ -1,0 +1,121 @@
+// VALUE \\
+value[[Arithmetic: exp1 -> exp2 (+|-|*|/) exp3]] =
+    value[[exp2]]
+    exp2.type.convertTo(exp1.type)
+    value[[exp3]]
+    exp3.type.convertTo(exp1.type)
+    switch (exp1.operator) {
+        case "+": <add> exp1.type.suffix() break;
+        case "-": <sub> exp1.type.suffix() break;
+        case "*": <mul> exp1.type.suffix() break;
+        case "/": <div> exp1.type.suffix() break;
+    }
+
+
+value[[Relational: exp1 -> exp2 (>|>=|<|<=|!=|==) exp3]] =
+    value[[exp2]]
+    value[[exp3]]
+    switch (exp1.operator) {
+        case ">": <gt> exp1.type.suffix() break;
+        case ">=": <ge> exp1.type.suffix() break;
+        case "<": <lt> exp1.type.suffix() break;
+        case "<=": <le> exp1.type.suffix() break;
+        case "!=": <ne> exp1.type.suffix() break;
+        case "==": <eq> exp1.type.suffix() break;
+    }
+
+value[[Logical: exp1 -> exp2 (&& | ||) exp3]] =
+    value[[exp2]]
+    value[[exp3]]
+    switch (exp1.operator) {
+        case "&&": <and> break;
+        case "||": <or> break;
+    }
+
+value[[UnaryNegation: exp1 -> exp2]] =
+    value[[exp2]]
+    <not>
+
+value[[DoubleLiteral: exp -> REAL_CONSTANT]] =
+    <pushf > exp.value
+
+value[[IntLiteral: exp -> INT_CONSTANT]] =
+    <pushi > exp.value
+
+value[[CharLiteral: exp -> CHAR_CONSTANT]] =
+    <pushb > exp.value
+
+value[[Cast: exp1 -> type exp2]] =
+    value[[exp2]]
+    exp2.type.convertTo(type)
+
+value[[Variable: exp -> ID]] =
+    address[[exp]]
+    <load> exp.type.suffix()
+
+// ADDRESS \\
+address[[Variable: exp -> ID]] =
+    if (exp.definition.scope==0)
+        <pusha > exp.definition.offset
+    else {
+        <push bp>
+        <pushi > exp.definition.offset
+        <addi>
+    }
+
+
+// EXECUTE \\
+execute[[Write: stm -> exp]] =
+    <' * Write>
+    value[[exp]]
+    <out> exp.type.suffix()
+
+execute[[Read: stm -> exp]] =
+    <' * Read>
+    address[[exp]]
+    <in> exp.type.suffix()
+    <store> exp.type.suffix()
+
+execute[[FunctionDef: def -> type ID statement*]] =
+    ID <:>
+    execute[[type]]
+
+    <' * Local variables>
+    int bytesLocals = 0;
+    for (i = 0; i < statement*.size(); i++) {
+        if (!statement*.get(i) instanceof VarDefinition) {
+            if (i > 0)
+                bytesLocals = -statement*.get(i-1).offset
+            break;
+        }
+    }
+    <enter > bytesLocals
+
+    // statements
+    int bytesReturn = type.returnType.numberOfBytes()
+    int bytesParams = type.parameters.stream().mapToInt( param -> param.type.numberOfBytes() ).sum()
+    statement*.forEach( stm -> execute[[stm]](bytesReturn, bytesLocals, bytesParams) )
+
+    // add a return if void
+    if (bytesReturn == 0 )
+        <ret > bytesReturn <, > bytesLocals <, > bytesParams
+
+execute[[Assignment: stm -> exp1 exp2]] =
+    address[[exp1]]
+    value[[exp2]]
+    <store> exp1.type.suffix()
+
+execute[[Program: program -> definition*]] =
+    <#source\t"input.txt">
+    definition*.forEach( def -> execute[[def]] )
+
+    <' Invocation to the main function>
+    <call main>
+    <halt>
+
+execute[[FunctionType: type1 -> varDefinition* type2]] =
+    <' * Parameters>
+    varDefinition*.forEach(p -> execute[[p]]);
+
+execute[[VarDefinition: definition -> type ID]] =
+    <' *> type.toString() ID <offset(> definition.offset <)>
