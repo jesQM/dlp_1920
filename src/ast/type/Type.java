@@ -19,4 +19,6 @@ public interface Type extends ASTNode {
     Type dot(String ID, ASTNode lineAndColumn);
 
     int getNumberOfBytes();
+
+    String suffix();
 }

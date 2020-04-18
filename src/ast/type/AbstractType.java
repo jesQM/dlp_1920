@@ -82,4 +82,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type{
 	public int getNumberOfBytes() {
 		return this.numberOfBytes;
 	}
+
+	@Override
+	public String suffix() {
+		return null;
+	}
 }

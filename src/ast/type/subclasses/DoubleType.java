@@ -56,4 +56,9 @@ public class DoubleType extends AbstractType{
 	public Type canBeMinus(ASTNode lineAndColumn) {
 		return new DoubleType(lineAndColumn.getLine(), lineAndColumn.getColumn());
 	}
+
+	@Override
+	public String suffix() {
+		return "f";
+	}
 }

@@ -72,4 +72,9 @@ public class IntType extends AbstractType{
 	public boolean isBoolean(ASTNode lineAndColumn) {
 		return true;
 	}
+
+	@Override
+	public String suffix() {
+		return "i";
+	}
 }

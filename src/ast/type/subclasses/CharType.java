@@ -51,4 +51,9 @@ public class CharType extends AbstractType{
 
 		return super.canBeAssigned(other, lineAndColumn);
 	}
+
+	@Override
+	public String suffix() {
+		return "b";
+	}
 }

@@ -25,6 +25,10 @@ public class Logical extends AbstractExpression {
         return rightSide;
     }
 
+    public String getOperator() {
+        return operator;
+    }
+
     @Override
     public String toString() {
         return "{ " +leftSide+ " " +operator+ " " +rightSide+ "}";
