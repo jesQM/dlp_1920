@@ -1,5 +1,7 @@
 package visitor.codeGeneration;
 
+import ast.type.Type;
+
 import java.io.PrintStream;
 
 public class CodeGenerator {
@@ -28,12 +30,16 @@ public class CodeGenerator {
             this.indentationNumber--;
     }
 
-    public void writeIndentation(){
+    private void writeIndentation(){
         for (int i = 0; i < indentationNumber; i++)
             code.append('\t');
     }
 
     public void showCode(PrintStream out){
         out.print(code);
+    }
+
+    public void convert(Type from, Type to) {
+        // TODO;
     }
 }
