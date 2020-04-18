@@ -4,6 +4,7 @@ import ast.expression.subclasses.*;
 import ast.type.subclasses.RecordType;
 
 public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
+
     @Override
     public Void visit(Arithmetic ast, Void param) {
         ast.getLeftSide().accept(this, param);                  // value[[exp2]]
@@ -24,6 +25,11 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
             case "/":
                 cg.writeCode( "div" + ast.getType().suffix() );
                 break;
+            case "%":
+                cg.writeCode( "mod" + ast.getType().suffix() );
+                break;
+            default:
+                throw new RuntimeException("Operation not supported: " + ast.getOperator() );
         }
         return null;
     }
@@ -51,6 +57,8 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
             case "==":
                 cg.writeCode("eq" + ast.getType().suffix());
                 break;
+            default:
+                throw new RuntimeException("Operation not supported: " + ast.getOperator() );
         }
         return null;
     }
@@ -61,17 +69,19 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
         ast.getRightSide().accept(this, param);
         switch (ast.getOperator()) {
             case "&&":
-                cg.writeCode("and" + ast.getType().suffix());
+                cg.writeCode("and");
                 break;
             case "||":
-                cg.writeCode("or" + ast.getType().suffix());
+                cg.writeCode("or");
                 break;
+            default:
+                throw new RuntimeException("Operation not supported: " + ast.getOperator() );
         }
         return null;
     }
 
     @Override
-    public Void visit(UnaryMinus ast, Void param) {
+    public Void visit(UnaryNegation ast, Void param) {
         ast.getExpression().accept(this, param);
         cg.writeCode("not");
         return null;

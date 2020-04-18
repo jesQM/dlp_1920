@@ -85,14 +85,18 @@ public class ExecuteCGVisitor extends AbstractCGVisitor<Void, Void>  {
     @Override
     public Void visit(Program ast, Void param) {
         cg.writeCode("# source\t\"input.txt\"");
+        cg.writeCode("");
 
         cg.incrementIndentation();
         ast.getDefinitions().forEach( def -> def.accept(execute, param) );
         cg.decrementIndentation();
 
+        cg.writeCode("");
         cg.writeComment("Invocation to the main function");
         cg.writeCode("call main");
         cg.writeCode("halt");
+
+        cg.showCode(System.out); // Show program output
 
         return null;
     }

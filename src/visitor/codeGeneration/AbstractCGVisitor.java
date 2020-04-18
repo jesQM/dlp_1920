@@ -9,11 +9,16 @@ import ast.type.subclasses.*;
 import visitor.AbstractVisitor;
 
 public abstract class AbstractCGVisitor<TP, TR> extends AbstractVisitor<TP, TR> {
-    protected CodeGenerator cg = new CodeGenerator();
-    protected ValueCGVisitor value = new ValueCGVisitor();
-    protected AddressCGVisitor address = new AddressCGVisitor();
-    protected ExecuteCGVisitor execute = new ExecuteCGVisitor();
+    public CodeGenerator cg = new CodeGenerator();
+    public ValueCGVisitor value = null;
+    public AddressCGVisitor address = null;
+    public ExecuteCGVisitor execute = null;
 
+    public AbstractCGVisitor(){
+
+
+
+    }
 
     private void throwError(String templateName) {
         String msg = String.format("Undefined template %s for the code function %s", templateName, this.getClass().getName());
