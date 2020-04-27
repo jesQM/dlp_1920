@@ -5,6 +5,9 @@ import ast.type.AbstractType;
 import ast.type.Type;
 import visitor.Visitor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IntType extends AbstractType{
 
 	public IntType(int line, int column) {
@@ -76,5 +79,17 @@ public class IntType extends AbstractType{
 	@Override
 	public String suffix() {
 		return "i";
+	}
+
+	@Override
+	public String[] convertTo(Type to) {
+		if (to instanceof CharType) {
+			return new String[] {"i2b"};
+		} else if (to instanceof IntType) {
+			return new String[] {};
+		} else if (to instanceof DoubleType) {
+			return new String[] {"i2f"};
+		}
+		return super.convertTo(to);
 	}
 }

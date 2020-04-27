@@ -1,7 +1,7 @@
 package visitor.codeGeneration;
 
 import ast.expression.subclasses.*;
-import ast.type.subclasses.RecordType;
+import ast.statement.subclasses.FunctionInvoke;
 
 public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
 
@@ -89,19 +89,19 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
 
     @Override
     public Void visit(CharLiteral ast, Void param) {
-        cg.writeCode("pushb " + ast.getValue());
+        cg.writeCode("pushb\t" + ast.getAsciiValue());
         return null;
     }
 
     @Override
     public Void visit(IntLiteral ast, Void param) {
-        cg.writeCode("pushi " + ast.getValue());
+        cg.writeCode("pushi\t" + ast.getValue());
         return null;
     }
 
     @Override
     public Void visit(DoubleLiteral ast, Void param) {
-        cg.writeCode("pushf " + ast.getValue());
+        cg.writeCode("pushf\t" + ast.getValue());
         return null;
     }
 
@@ -114,11 +114,31 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
 
     @Override
     public Void visit(Variable ast, Void param) {
-        ast.accept(address, param); // address.visit(ast, param); //TODO; Which version is correct?
+        ast.accept(address, param);
         cg.writeCode("load" + ast.getType().suffix());
         return null;
     }
 
+    @Override
+    public Void visit(FieldAccess ast, Void param) {
+        ast.accept(address, param);
+        cg.writeCode("load" + ast.getType().suffix());
+        return null;
+    }
+
+    @Override
+    public Void visit(Indexing ast, Void param) {
+        ast.accept(address, param);
+        cg.writeCode("load" + ast.getType().suffix());
+        return null;
+    }
+
+    @Override
+    public Void visit(FunctionInvoke ast, Void param) {
+        ast.getParameters().forEach( p -> p.accept(value, param) );
+        cg.writeCode("call " + ast.getVariable().getName());
+        return null;
+    }
 }
 
 /**
@@ -176,5 +196,17 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
  value[[Variable: exp -> ID]] =
      address[[exp]]
      <load> exp.type.suffix()
+
+ value[[Indexing: expression1 -> expression2 expression3]] =
+     address[[expression1]]
+     <load> expression2.type.arrayOf.suffix()
+
+ value[FieldAcess: expression1 -> expression2 ID] =
+     address[[expression1]]
+     <load> expression1.type.suffix()
+
+ value[[FuncInvoke: expression1 -> expression2 expression3*]] =
+     expression3*.forEach( exp -> value[[exp]] )
+     <call > expression2.name
 
  */

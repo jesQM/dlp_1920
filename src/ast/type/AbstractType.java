@@ -87,4 +87,9 @@ public abstract class AbstractType extends AbstractASTNode implements Type{
 	public String suffix() {
 		return null;
 	}
+
+	@Override
+	public String[] convertTo(Type to) {
+		throw new RuntimeException("Operation not supported: convert " + this.toString() + " to " + to.toString());
+	}
 }

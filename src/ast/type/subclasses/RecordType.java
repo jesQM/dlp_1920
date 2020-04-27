@@ -26,6 +26,10 @@ public class RecordType extends AbstractType{
 		return new ArrayList<>(this.fields);
 	}
 
+	public RecordField getField(String name){
+		return fields.stream().filter( f -> f.getName().equals(name) ).findFirst().get();
+	}
+
 	@Override
 	protected void setNumberOfBytes(int amount) {
 		int addition = 0;

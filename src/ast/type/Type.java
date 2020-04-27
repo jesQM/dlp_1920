@@ -21,4 +21,5 @@ public interface Type extends ASTNode {
     int getNumberOfBytes();
 
     String suffix();
+    String[] convertTo(Type to);
 }

@@ -26,7 +26,7 @@ public class CharType extends AbstractType{
 	@Override
 	public Type arithmetic(Type other, ASTNode lineAndColumn) {
 		if (other instanceof CharType) {
-			return new CharType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
 		}
 
 		return super.arithmetic(other, lineAndColumn);
@@ -55,5 +55,17 @@ public class CharType extends AbstractType{
 	@Override
 	public String suffix() {
 		return "b";
+	}
+
+	@Override
+	public String[] convertTo(Type to) {
+		if (to instanceof CharType) {
+			return new String[] {};
+		} else if (to instanceof IntType) {
+			return new String[] {"b2i"};
+		} else if (to instanceof DoubleType) {
+			return new String[] {"b2i", "i2f"};
+		}
+		return super.convertTo(to);
 	}
 }

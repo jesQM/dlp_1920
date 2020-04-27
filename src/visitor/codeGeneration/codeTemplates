@@ -119,3 +119,106 @@ execute[[FunctionType: type1 -> varDefinition* type2]] =
 
 execute[[VarDefinition: definition -> type ID]] =
     <' *> type.toString() ID <offset(> definition.offset <)>
+
+
+
+
+
+
+
+
+address[[Indexing: expression1 -> expression2 expression3]] =
+    address[[expression2]]
+    value[[expression3]]
+    <pushi > expression1.type.numberOfBytes()
+    <muli>
+    <addi>
+
+
+
+value[[Indexing: expression1 -> expression2 expression3]] =
+    address[[expression1]]
+    <load> expression2.type.arrayOf.suffix()
+
+
+
+
+address[FieldAcess: expression1 -> expression2 ID] =
+    address[[expression2]]
+    <pushi > expression2.type.getField(ID).offset
+    <addi >
+
+
+
+value[FieldAcess: expression1 -> expression2 ID] =
+    address[[expression1]]
+    <load> expression1.type.suffix()
+
+
+
+execute[[Return: statement -> expression]](int bytesLocals, int bytesParams, int bytesReturn) =
+    value[[expression]]
+    <ret > bytesLocals <, > bytesParams <, > bytesReturn
+
+
+
+value[[FuncInvoke: expression1 -> expression2 expression3*]] =
+    expression3*.forEach( exp -> value[[exp]] )
+    <call > expression2.name
+
+
+
+execute[[FuncInvoke: statement -> expression1 expression2*]] =
+    expression2*.forEach( exp -> value[[exp]] )
+    <call > expression1.name
+    if ( !expression1.type.returnType instanceof VoidType )
+        <pop> expression1.type.returnType.suffix()
+
+
+
+execute[[IfElse: statement1 -> expression statement2* statement3*]] =
+    int labelNumber = cg.getLabels(2);
+
+    // condition
+    <' * If statement>
+    value[[expression]]
+    <jz > labelNumber
+
+    <' * Body of the if branch>
+    statement2*.forEach( stm -> execute[[stm]])
+    <jmp > (labelNumber+1)
+
+    // else
+    <label> labelNumber <:>
+    <' * Body of the else branch>
+    statement3*.forEach( stm -> execute[[stm]])
+
+    <label> (labelNumber+1) <:>
+
+
+
+execute[[WhileLoop: statement1 -> expression statement2*]] =
+    int labelNumber = cg.getLabel(2);
+    // start:
+    <' * While>
+    <label> labelNumber <:>
+
+    // condition
+    value[[expression]]
+    <jz label> (labelNumber+1)
+
+    // body
+    <' * Body of the while statement>
+    statement2*.forEach( stm -> execute[[stm]])
+
+    // jmp start
+    <jmp label> labelNumber
+    <label> (labelNumber+1) <:>
+
+
+
+
+
+
+
+

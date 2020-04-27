@@ -10,7 +10,7 @@ import visitor.AbstractVisitor;
 
 public abstract class AbstractCGVisitor<TP, TR> extends AbstractVisitor<TP, TR> {
     public CodeGenerator cg = new CodeGenerator();
-    public ValueCGVisitor value = null;
+    public ValueCGVisitor value = null; //TODO; Repair params
     public AddressCGVisitor address = null;
     public ExecuteCGVisitor execute = null;
 

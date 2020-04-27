@@ -6,6 +6,7 @@ import java.io.PrintStream;
 
 public class CodeGenerator {
     private int indentationNumber = 0;
+    private int labelCount = 0;
     private StringBuilder code = new StringBuilder();
 
     public void writeCode(String code) {
@@ -30,6 +31,11 @@ public class CodeGenerator {
             this.indentationNumber--;
     }
 
+    public int getLabels(int amount) {
+        labelCount += amount;
+        return labelCount-amount;
+    }
+
     private void writeIndentation(){
         for (int i = 0; i < indentationNumber; i++)
             code.append('\t');
@@ -40,6 +46,15 @@ public class CodeGenerator {
     }
 
     public void convert(Type from, Type to) {
-        // TODO;
+        String[] lines = from.convertTo(to);
+        for (String line: lines) {
+            writeCode(line);
+        }
+
+    }
+
+    public void writeLabel(String name) {
+        this.code.append(" " + name + ":");
+        this.code.append('\n');
     }
 }

@@ -17,6 +17,10 @@ public class CharLiteral extends AbstractExpression {
 		return value;
 	}
 
+	public int getAsciiValue() {
+		return (int) value;
+	}
+
 	@Override
 	public String toString() {
 		return "\'"+value+"\'";
