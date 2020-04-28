@@ -13,13 +13,6 @@ import javax.swing.plaf.nimbus.State;
 public class OffsetVisitor extends AbstractVisitor<Integer, Void> {
 
     private int globalVariablesTotalOffset;
-    /*
-    Annotate the AST with the offsets of:
-        - Global variables
-        - Local variables
-        - (Formal) parameters
-        - Record fields
-    */
 
     @Override
     public Void visit(FunctionType ast, Integer param) {

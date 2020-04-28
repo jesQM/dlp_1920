@@ -41,7 +41,7 @@ public class RecordType extends AbstractType{
 
 	@Override
 	public String toString() {
-		return "record {"+fields+"}";
+		return "record ("+fields+")";
 	}
 
 	@Override

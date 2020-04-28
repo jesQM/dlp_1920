@@ -18,12 +18,21 @@ public class ArrayType extends AbstractType{
 		super.setNumberOfBytes( this.length * this.arrayOf.getNumberOfBytes() );
 	}
 
+	private void updateNumberOfBytes(){
+		super.setNumberOfBytes( this.length * this.arrayOf.getNumberOfBytes() );
+	}
+
 	public Type getArrayOf() {
 		return arrayOf;
 	}
 
 	public int getLength() {
 		return length;
+	}
+
+	@Override
+	public String toString() {
+		return "[" + this.length +"," + this.arrayOf.toString() + "]";
 	}
 
 	@Override
@@ -65,7 +74,8 @@ public class ArrayType extends AbstractType{
 	private ArrayType recursiveCreation(int line, int column, Type arrayOf, int length) {
 		ArrayType result = null;
 		if (arrayOf instanceof ArrayType) {
-			result =  ((ArrayType) arrayOf).recursiveCreation(line, column, this.arrayOf, length);
+			result = ((ArrayType) arrayOf).recursiveCreation(line, column, this.arrayOf, length);
+			result.updateNumberOfBytes();
 		} else {
 			result = new ArrayType(line, column, this.arrayOf, length);
 			this.arrayOf = result;

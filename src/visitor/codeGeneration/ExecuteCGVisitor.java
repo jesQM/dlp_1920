@@ -174,8 +174,9 @@ public class ExecuteCGVisitor extends AbstractCGVisitor<ReturnStatementDTO, Void
 
     @Override
     public Void visit(Return ast, ReturnStatementDTO param) {
+        cg.writeComment("* Return");
         ast.getExpression().accept(value, null);
-        cg.writeCode(String.format("ret\t%s, %s, %s", param.bytesLocals, param.bytesParams, param.bytesReturn));
+        cg.writeCode(String.format("ret\t%s, %s, %s", param.bytesReturn, param.bytesLocals, param.bytesParams));
         return null;
     }
 
