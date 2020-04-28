@@ -14,6 +14,7 @@ import ast.type.subclasses.*;
 
 program returns [Program ast]: program_definitions main_function { $program_definitions.ast.add($main_function.ast); } EOF { $ast = new Program(0,0,$program_definitions.ast); }
        ;
+
 program_definitions returns [List<Definition> ast = new ArrayList<>()]:
         (variable_definition {$ast.addAll($variable_definition.ast);} | function_definition {$ast.add($function_definition.ast);})*
         ;
@@ -117,6 +118,8 @@ expression returns [Expression ast]:
                 { $ast = new IntLiteral( $INT_CONSTANT.getLine(), $INT_CONSTANT.getCharPositionInLine()+1, LexerHelper.lexemeToInt($INT_CONSTANT.text) ); }
             | CHAR_CONSTANT
                 { $ast = new CharLiteral( $CHAR_CONSTANT.getLine(), $CHAR_CONSTANT.getCharPositionInLine()+1, LexerHelper.lexemeToChar($CHAR_CONSTANT.text) ); }
+            | BOOLEAN_CONSTANT
+                { $ast = new BooleanLiteral( $BOOLEAN_CONSTANT.getLine(), $BOOLEAN_CONSTANT.getCharPositionInLine()+1, LexerHelper.lexemeToBoolean($BOOLEAN_CONSTANT.text) ); }
             | ID
                 { $ast = new Variable( $ID.getLine(), $ID.getCharPositionInLine()+1, $ID.text ); }
             ;
@@ -156,6 +159,7 @@ record_fields_definition returns [List<RecordField> ast = new ArrayList<>()]:
 primitive_type returns [Type ast]: op='int' { $ast = new IntType( $op.getLine(), $op.getCharPositionInLine()+1 ); }
             | op='char' { $ast = new CharType( $op.getLine(), $op.getCharPositionInLine()+1 ); }
             | op='double' { $ast = new DoubleType( $op.getLine(), $op.getCharPositionInLine()+1 ); }
+            | op='bool' { $ast = new BoolType( $op.getLine(), $op.getCharPositionInLine()+1 ); }
             ;
 
 
@@ -164,7 +168,9 @@ INT_CONSTANT: '0'
             | [1-9][0-9]*
             ;
 
-
+BOOLEAN_CONSTANT : 'true'
+            | 'false'
+            ;
 
 CHAR_CONSTANT: '\''CHAR_CONTENT'\''
             ;

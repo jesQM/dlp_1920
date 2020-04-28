@@ -1,0 +1,48 @@
+/* 
+Language extensions to be implemented by the student:
+ - Add a bool built-in type to your compiler.
+ - Add the true and false constants (literals).
+ - Bool expressions could be written and assigned (both LHS and RHS must be bool).
+ - if and while conditions *must* be bool (no longer int; i.e., like Java).
+*/
+
+bool global; 
+
+void right() { 
+
+	bool local, local2; 
+
+	global = false;
+	local = true;  
+	local2 = global ;
+		
+	write global, local, local2; // shows 0, 1 (any value different to 0) and 0
+		
+	if (local) write 1;  // shows 1
+	else write 0;
+		
+	while(global) write 1; // shows nothing
+}
+
+/* 
+The following function has compiler errors.
+Check that your compiler shows the appropriate error messages.
+Then, comment the whole function to check that the rest of the program is compiled correctly
+   and its output code runs as expected.
+*/
+void wrong() {
+	bool myBool; 
+	int i;
+	
+	i = 0;
+	if (1) // compiler error (the if condition must be bool)
+		write 1; 
+	while (0) // compiler error (the while condition must be bool) 
+		write 0;
+	myBool = i;  // compiler error
+}
+
+void main() {
+	right(); 
+	write '\n';
+}

@@ -88,6 +88,12 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
     }
 
     @Override
+    public Void visit(BooleanLiteral ast, Void param) {
+        cg.writeCode("pushi\t" + ast.getNumericValue());
+        return null;
+    }
+
+    @Override
     public Void visit(CharLiteral ast, Void param) {
         cg.writeCode("pushb\t" + ast.getAsciiValue());
         return null;
@@ -187,6 +193,9 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
     <pushi > exp.value
 
  value[[CharLiteral: exp -> CHAR_CONSTANT]] =
+    <pushb > exp.value
+
+ value[[BooleanLiteral: exp -> BOOLEAN_CONSTANT]] =
     <pushb > exp.value
 
  value[[Cast: exp1 -> type exp2]] =

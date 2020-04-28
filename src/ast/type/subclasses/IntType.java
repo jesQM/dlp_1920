@@ -71,10 +71,10 @@ public class IntType extends AbstractType{
 		return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
 	}
 
-	@Override
+	/*@Override
 	public boolean isBoolean(ASTNode lineAndColumn) {
 		return true;
-	}
+	} */
 
 	@Override
 	public String suffix() {

@@ -1,7 +1,6 @@
 package visitor.semantic;
 
 import ast.definitions.subclasses.FuncDefinition;
-import ast.expression.Expression;
 import ast.expression.subclasses.*;
 import ast.statement.subclasses.*;
 import ast.type.Type;
@@ -51,6 +50,16 @@ public class TypeCheckingVisitor extends AbstractVisitor<Type, Type> {
 
         // Type of the expression
         ast.setType( new DoubleType(ast.getLine(), ast.getColumn()) );
+        return null;
+    }
+
+    @Override
+    public Type visit(BooleanLiteral ast, Type param) {
+        super.visit(ast, param);
+        ast.setLvalue(false);
+
+        // Type of the expression
+        ast.setType( new BoolType(ast.getLine(), ast.getColumn()) );
         return null;
     }
 

@@ -161,6 +161,16 @@ public abstract class AbstractVisitor<TP, TR> implements Visitor<TP, TR> {
     }
 
     @Override
+    public TR visit(BoolType ast, TP param) {
+        return null;
+    }
+
+    @Override
+    public TR visit(BooleanLiteral ast, TP param) {
+        return null;
+    }
+
+    @Override
     public TR visit(Relational ast, TP param) {
         ast.getLeftSide().accept(this, param);
         ast.getRightSide().accept(this, param);

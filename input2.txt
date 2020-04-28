@@ -1,0 +1,77 @@
+/* 
+IMPORTANT: This activity can be done *only* when input1.txt is finished.
+Remember to create a copy of the previous activity to not modify it.
+
+Add the additional language extensions to your compiler:
+ - Functions may receive and return bool types (they are built-in).
+ - Comparison operations return bool (not int; i.e., like Java).
+ - Logical operands *must* receive and return bool (not int; i.e., like Java).
+*/
+
+bool global; 
+
+bool right(bool param) { 
+	bool myBool;
+	int int1, int2;
+		
+	int1 = 1;
+	int2 = 2;
+	global = false;
+	myBool = true;
+	myBool = param;
+		
+	write global, myBool, param; // shows 0, 1 and 1
+		
+	if (param) write 1;  // shows 1
+	else write 0;
+		
+	while(global) write 1; // shows nothing
+		
+	myBool = int1 < int2;
+	write myBool; // shows 1
+    myBool = int1 != int2;
+    write myBool; // shows 1
+    myBool = int1 > int2;
+    write myBool; // shows 0
+    myBool = 3.4 == 3.4e+1;
+    write myBool; // shows 0
+		
+	myBool = param || global;
+	write myBool; // shows 1
+	myBool = param && myBool;
+	write myBool; // shows 1
+	myBool = !param;
+	write myBool; // shows 0
+			  
+	return param;
+}
+
+
+/* 
+The following function has compiler errors.
+Check that your compiler shows the appropriate error messages.
+Then, comment the whole function to check that the rest of the program is compiled correctly
+   and its output code runs as expected.
+*/
+void wrong() {
+	bool myBool; 
+	int i;
+	
+	i = 3 > 2; // compiler error (comparisons return bool)
+	myBool = 3 > 2; // OK
+	i = 3.2 != 3.4; // compiler error (comparisons return bool)
+	myBool = 3.2 != 3.4; // OK
+	
+	write i && 0; // compiler error (logical operands must be bool)
+	i = true && myBool; // compiler error (logical expressions return bool)
+	myBool = true && myBool; // OK
+	write !i;  // compiler error (logical operands must be bool)
+	i = !myBool; // compiler error (logical expressions return bool)
+	myBool = !myBool; // OK
+}
+
+
+void main() {
+	write !right(true); // shows 0 
+	write '\n';
+}

@@ -56,6 +56,12 @@ public abstract class AbstractCGVisitor<TP, TR> extends AbstractVisitor<TP, TR> 
     }
 
     @Override
+    public TR visit(BoolType ast, TP param) {
+        throwError("visitBoolType");
+        return null;
+    }
+
+    @Override
     public TR visit(FunctionType ast, TP param) {
         throwError("visitFunctionType");
         return null;
@@ -166,6 +172,12 @@ public abstract class AbstractCGVisitor<TP, TR> extends AbstractVisitor<TP, TR> 
     @Override
     public TR visit(IntLiteral ast, TP param) {
         throwError("visitIntLiteral");
+        return null;
+    }
+
+    @Override
+    public TR visit(BooleanLiteral ast, TP param) {
+        throwError("visitBooleanLiteral");
         return null;
     }
 

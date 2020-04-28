@@ -12,6 +12,10 @@ public class LexerHelper {
 		return -1;
 	}
 
+	public static boolean lexemeToBoolean(String str) {
+		return Boolean.parseBoolean(str);
+	}
+
 	public static char lexemeToChar( String str ) {
 
 		String lexeme = str.substring(1, str.length()-1);

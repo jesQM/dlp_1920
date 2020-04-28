@@ -20,6 +20,7 @@ public interface Visitor<TP,TR> {
     TR visit(RecordField ast, TP param);
     TR visit(RecordType ast, TP param);
     TR visit(VoidType ast, TP param);
+    TR visit(BoolType ast, TP param);
 
     // Statement
     TR visit(Assignment ast, TP param);
@@ -38,6 +39,7 @@ public interface Visitor<TP,TR> {
     TR visit(FieldAccess ast, TP param);
     TR visit(Indexing ast, TP param);
     TR visit(IntLiteral ast, TP param);
+    TR visit(BooleanLiteral ast, TP param);
     TR visit(Relational ast, TP param);
     TR visit(UnaryMinus ast, TP param);
     TR visit(UnaryNegation ast, TP param);
@@ -47,4 +49,5 @@ public interface Visitor<TP,TR> {
     TR visit(FuncDefinition ast, TP param);
     TR visit(VarDefinition ast, TP param);
     TR visit(Logical ast, TP param);
+
 }
