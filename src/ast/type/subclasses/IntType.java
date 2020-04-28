@@ -35,18 +35,9 @@ public class IntType extends AbstractType{
 	}
 
 	@Override
-	public Type logical(Type other, ASTNode lineAndColumn) {
-		if (other instanceof IntType) {
-			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		}
-
-		return super.logical(other, lineAndColumn);
-	}
-
-	@Override
 	public Type comparison(Type other, ASTNode lineAndColumn) {
 		if (other instanceof IntType) {
-			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+			return new BoolType(lineAndColumn.getLine(), lineAndColumn.getColumn());
 		}
 
 		return super.comparison(other, lineAndColumn);
@@ -67,16 +58,6 @@ public class IntType extends AbstractType{
 	}
 
 	@Override
-	public Type not(ASTNode lineAndColumn) {
-		return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-	}
-
-	/*@Override
-	public boolean isBoolean(ASTNode lineAndColumn) {
-		return true;
-	} */
-
-	@Override
 	public String suffix() {
 		return "i";
 	}
@@ -89,7 +70,10 @@ public class IntType extends AbstractType{
 			return new String[] {};
 		} else if (to instanceof DoubleType) {
 			return new String[] {"i2f"};
+		} else if (to instanceof BoolType) {
+			return new String[] {};
 		}
+
 		return super.convertTo(to);
 	}
 }

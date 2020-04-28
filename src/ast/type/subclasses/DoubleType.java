@@ -30,9 +30,7 @@ public class DoubleType extends AbstractType{
 	public Type arithmetic(Type other, ASTNode lineAndColumn) {
 		if (other instanceof DoubleType) {
 			return new DoubleType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		}/* else if (other instanceof IntType) {
-			return new DoubleType(lineAndColumn.getLine(), lineAndColumn.getColumn());
-		}*/
+		}
 
 		return super.arithmetic(other, lineAndColumn);
 	}
@@ -40,7 +38,7 @@ public class DoubleType extends AbstractType{
 	@Override
 	public Type comparison(Type other, ASTNode lineAndColumn) {
 		if (other instanceof DoubleType) {
-			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+			return new BoolType(lineAndColumn.getLine(), lineAndColumn.getColumn());
 		}
 
 		return super.arithmetic(other, lineAndColumn);
@@ -73,7 +71,10 @@ public class DoubleType extends AbstractType{
 			return new String[] {"f2i"};
 		} else if (to instanceof DoubleType) {
 			return new String[] {};
+		} else if (to instanceof BoolType) {
+			return new String[] {"f2i"};
 		}
+
 		return super.convertTo(to);
 	}
 }

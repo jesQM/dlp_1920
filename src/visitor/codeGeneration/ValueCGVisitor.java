@@ -37,7 +37,9 @@ public class ValueCGVisitor extends AbstractCGVisitor<Void, Void> {
     @Override
     public Void visit(Relational ast, Void param) {
         ast.getLeftSide().accept(this, param);
+        cg.convert(ast.getLeftSide().getType(), ast.getType());
         ast.getRightSide().accept(this, param);
+        cg.convert(ast.getLeftSide().getType(), ast.getType());
         switch (ast.getOperator()) {
             case ">":
                 cg.writeCode("gt" + ast.getType().suffix());

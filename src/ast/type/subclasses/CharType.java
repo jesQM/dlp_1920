@@ -35,9 +35,9 @@ public class CharType extends AbstractType{
 	@Override
 	public Type comparison(Type other, ASTNode lineAndColumn) {
 		if (other instanceof CharType) {
-			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+			return new BoolType(lineAndColumn.getLine(), lineAndColumn.getColumn());
 		} else if (other instanceof IntType) {
-			return new IntType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+			return new BoolType(lineAndColumn.getLine(), lineAndColumn.getColumn());
 		}
 
 		return super.arithmetic(other, lineAndColumn);
@@ -65,7 +65,10 @@ public class CharType extends AbstractType{
 			return new String[] {"b2i"};
 		} else if (to instanceof DoubleType) {
 			return new String[] {"b2i", "i2f"};
+		} else if (to instanceof BoolType) {
+			return new String[] {"b2i"};
 		}
+
 		return super.convertTo(to);
 	}
 }

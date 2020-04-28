@@ -1,30 +1,52 @@
 /*
-Language extensions to be implemented by the student:
- - Add a bool built-in type to your compiler.
- - Add the true and false constants (literals).
- - Bool expressions could be written and assigned (both LHS and RHS must be bool).
- - if and while conditions *must* be bool (no longer int; i.e., like Java).
+IMPORTANT: This activity can be done *only* when input1.txt is finished.
+Remember to create a copy of the previous activity to not modify it.
+
+Add the additional language extensions to your compiler:
+ - Functions may receive and return bool types (they are built-in).
+ - Comparison operations return bool (not int; i.e., like Java).
+ - Logical operands *must* receive and return bool (not int; i.e., like Java).
 */
 
 bool global;
 
-void right() {
+bool right(bool param) {
+	bool myBool;
+	int int1, int2;
 
-	bool local, local2;
-
+	int1 = 1;
+	int2 = 2;
 	global = false;
-	local = true;
-	local2 = global ;
+	myBool = true;
+	myBool = param;
 
-	write global, local, local2; // shows 0, 1 (any value different to 0) and 0
+	write global, myBool, param; // shows 0, 1 and 1
 
-	if (local) write 1;  // shows 1
+	if (param) write 1;  // shows 1
 	else write 0;
 
 	while(global) write 1; // shows nothing
+
+	myBool = int1 < int2;
+	write myBool; // shows 1
+    myBool = int1 != int2;
+    write myBool; // shows 1
+    myBool = int1 > int2;
+    write myBool; // shows 0
+    myBool = 3.4 == 3.4e+1;
+    write myBool; // shows 0
+
+	myBool = param || global;
+	write myBool; // shows 1
+	myBool = param && myBool;
+	write myBool; // shows 1
+	myBool = !param;
+	write myBool; // shows 0
+
+	return param;
 }
 
 void main() {
-	right();
+	write !right(true); // shows 0
 	write '\n';
 }

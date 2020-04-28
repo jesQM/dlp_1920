@@ -195,7 +195,7 @@ REAL_MANTISSA: (INT_CONSTANT)?'.'(DIGIT+)
             | (INT_CONSTANT)'.'DIGIT*
             ;
 fragment
-REAL_EXPONENT: ('e'|'E')'-'?INT_CONSTANT
+REAL_EXPONENT: ('e'|'E')('-'|'+')?INT_CONSTANT
             ;
 
 

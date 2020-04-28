@@ -32,6 +32,29 @@ public class BoolType extends AbstractType {
     }
 
     @Override
+    public Type logical(Type other, ASTNode lineAndColumn) {
+        if (other instanceof BoolType) {
+            return new BoolType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+        }
+
+        return super.logical(other, lineAndColumn);
+    }
+
+    @Override
+    public Type comparison(Type other, ASTNode lineAndColumn) {
+        if (other instanceof BoolType) {
+            return new BoolType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+        }
+
+        return super.comparison(other, lineAndColumn);
+    }
+
+    @Override
+    public Type not(ASTNode lineAndColumn) {
+        return new BoolType(lineAndColumn.getLine(), lineAndColumn.getColumn());
+    }
+
+    @Override
     public String suffix() {
         return "i";
     }
